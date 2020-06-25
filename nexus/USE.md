@@ -25,3 +25,5 @@ Name: release
 Create repository -> maven2(hosted)  
 创建信息：  
 Name: prod  
+
+> 这里只是示例，根据实际情况创建制品库  
