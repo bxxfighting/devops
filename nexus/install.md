@@ -8,3 +8,71 @@
 JAVA_HOME | /usr/local/jdk | 
 nexus安装路径 | /opt/nexus-workspace | 下载压缩包解压到此目录下
 端口号 | 8080 |
+
+### 修改配置文件
+配置文件```/opt/nexus-workspace/nexus/etc```  
+```
+application-port=8080
+```
+> 这里就只改了一下端口号，原来是8081，其实完全不用改，主要是看心情  
+
+配置java路径```/opt/nexus-workspace/nexus/bin/nexus```:  
+```
+INSTALL4J_JAVA_HOME_OVERRIDE=/usr/local/jdk
+```
+> [官方说明](https://help.sonatype.com/repomanager3/installation/system-requirements#SystemRequirements-Java)  
+> 这里需要在文件开始位置增加INSTALL4J_JAVA_HOME_OVERRIDE  
+
+### 配置systemd
+增加配置文件```/lib/systemd/system/nexus.service```:  
+```
+[Unit]
+Description=nexus service
+After=network.target
+
+[Service]
+Type=forking
+LimitNOFILE=65536
+ExecStart=/opt/nexus-workspace/nexus/bin/nexus start
+ExecStop=/opt/nexus-workspace/nexus/bin/nexus stop
+Restart=always
+TimeoutSec=600
+
+[Install]
+WantedBy=multi-user.target
+```
+> [官方说明](https://help.sonatype.com/repomanager3/installation/run-as-a-service#RunasaService-systemd)  
+
+执行命令:
+```
+systemctl daemon-reload
+systemctl start nexus
+```
+
+### 配置nginx
+```
+server {
+    listen   80;
+    server_name  nexus.buxingxing.com;
+
+    client_max_body_size 1G;
+
+    location / {
+      proxy_pass http://127.0.0.1:8080/;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+```
+
+### 登录
+登录时会有提示查看密码:  
+```
+cat /opt/nexus-workspace/sonatype-work/nexus3/admin.password
+```
+登录后修改密码  
+同时开启匿名下载  
+```
+Enable anonymous access
+```
