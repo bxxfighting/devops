@@ -5,7 +5,11 @@
 服务部署  
 
 ### Nexus
-制品库  
+[制品库](https://github.com/bxxfighting/devops/tree/master/nexus)  
+
+[安装说明](https://github.com/bxxfighting/devops/blob/master/nexus/install.md)  
+
+[使用说明](https://github.com/bxxfighting/devops/blob/master/nexus/USE.md)  
 
 ### Jumpserver
 服务器权限管理  
