@@ -7,6 +7,7 @@
 操作系统 | Ubuntu 16.04 server 64bit | 
 JAVA_HOME | /usr/local/jdk | 
 nexus安装路径 | /opt/nexus-workspace | 下载压缩包解压到此目录下
+nexus版本 | 3.24.0-02 |
 端口号 | 8080 |
 
 ### 修改配置文件
