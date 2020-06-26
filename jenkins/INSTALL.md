@@ -36,3 +36,8 @@ server {
 ```
 cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
+设置账号密码:  
+```
+账号: admin
+密码: admin
+```

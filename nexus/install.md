@@ -75,6 +75,10 @@ server {
 cat /opt/nexus-workspace/sonatype-work/nexus3/admin.password
 ```
 登录后修改密码  
+```
+账号: admin
+密码: admin
+```
 同时开启匿名下载  
 ```
 Enable anonymous access
